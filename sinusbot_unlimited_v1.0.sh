@@ -142,9 +142,9 @@ if [ "$INSTALL" == "Inst" ]; then
   rm -rf /tmp/.X11-unix
   rm -rf /tmp/.sinusbot.lock
   cd SinusPort-$portinst
-  su -c "cd; wget http://update.rawnetworks.eu/FILES/sinusbot-phpmulti/phpmulti-sinusbot.zip" SinusPort-$portinst
-  su -c "cd; wget http://update.rawnetworks.eu/FILES/sinusbot-phpmulti/ts3php.zip" SinusPort-$portinst
-  su -c "cd; wget https://cookiemc.tk/sinusbot/config.zip" SinusPort-$portinst
+  su -c "cd; wget https://cdn01.auto-installer.me/sinusbot_unlimited_files/phpmulti-sinusbot.zip" SinusPort-$portinst
+  su -c "cd; wget https://cdn01.auto-installer.me/sinusbot_unlimited_files/ts3php.zip" SinusPort-$portinst
+  su -c "cd; wget https://cdn01.auto-installer.me/sinusbot_unlimited_files/config.zip" SinusPort-$portinst
   su -c "cd; unzip phpmulti-sinusbot.zip" SinusPort-$portinst
   su -c "cd; unzip ts3php.zip" SinusPort-$portinst
   su -c "cd; unzip config.zip" SinusPort-$portinst
