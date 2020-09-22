@@ -44,26 +44,9 @@ function errorContinue() {
   return
 }
 
-function makeDir() {
-  if [ -n "$1" ] && [ ! -d "$1" ]; then
-    mkdir -p "$1"
-  fi
-}
-
-function heiz() {
-  apt-get install sudo -y
-  sudo apt-get install unzip -y
-  sudo apt-get install libxss1 -y
-  sudo apt-get install screen -y 
-  sudo apt-get update
-  sudo apt-get upgrade -y
-  apt-get -y -qq install libfontconfig libxtst6 screen xvfb libxcursor1 ca-certificates bzip2 psmisc libglib2.0-0 less cron-apt python iproute2 dbus libnss3 libegl1-mesa x11-xkb-utils libasound2 libxcomposite-dev libxi6 libpci3 libxslt1.1 libxkbcommon0 libxss1
-  update-ca-certificates
-}
-
 function ytdl() {
-  sudo curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
-  sudo chmod a+rx /usr/local/bin/youtube-dl
+  curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
+  chmod a+rx /usr/local/bin/youtube-dl
 }
 
 # provera da li je root
@@ -117,19 +100,29 @@ fi
 # install opt
 if [ "$INSTALL" == "Inst" ]; then
   greenMessage "Installing depencies..."
-  sudo dpkg --force-all -r atftpd
-  sudo apt-get install libglu1 -y
-  sudo apt install libXcomposite* libpci* -y
-  sudo apt-get install libnss3-dev -y
-  sudo apt-get install libfontconfig1 fontconfig libfontconfig1-dev -y
-  sudo apt-get install libfontconfig -y
-  sudo dpkg --add-architecture i3860 
-  sudo apt-get -y update  
-  sudo apt-get install unzip -y
-  sudo apt-get -y dist-upgrade 
-  sudo apt-get install screen -y
-  sudo apt-get -y -qq install screen x11vnc xvfb libpci* libxcursor1 libpulse0 libpulse0:i386 pulseaudio ca-certificates bzip2 psmisc libglib2.0-0 less cron-apt ntp python iproute2 dbus libnss3 libegl1-mesa x11-xkb-utils libasound2 libxcomposite-dev libxi6 unzip update-ca-certificates 
-  sudo apt-get -qq -y install ca-certificates bzip2 python wget -y update-ca-certificates
+  dpkg --force-all -r atftpd
+  apt-get install libglu1 -y
+  apt install libXcomposite* libpci* -y
+  apt-get install libnss3-dev -y
+  apt-get install libfontconfig1 fontconfig libfontconfig1-dev -y
+  apt-get install libfontconfig -y
+  x11vnc xvfb libxcursor1 bzip2 libnss3 libegl1-mesa x11-xkb-utils libasound2 -y
+  dpkg --add-architecture i3860 
+  apt-get -y update  
+  apt-get install libxcomposite-dev xinit -y
+  apt-get install x11vnc xvfb libxcursor1 ca-certificates libfontconfig1 libxkbcommon0 libxkbcommon-x11-0 libxslt-dev bzip2 libnss3 libegl1-mesa x11-xkb-utils libasound2 -y
+  update-ca-certificates
+  apt-get install libglib2.0-0 -y
+  apt-get install netcat
+  apt-get install unzip -y
+  apt-get -y dist-upgrade 
+  apt-get -qq install x11vnc xinit xvfb libxcursor1 ca-certificates bzip2 curl libglib2.0-0 nano screen unzip -y
+  apt-get install libnss3-dev -y
+  apt-get install screen -y
+  apt-get -y -qq install screen x11vnc xvfb libpci* libxcursor1 libpulse0 libpulse0:i386 pulseaudio ca-certificates bzip2 psmisc libglib2.0-0 less cron-apt ntp python iproute2 dbus libnss3 libegl1-mesa x11-xkb-utils libasound2 libxcomposite-dev libxi6 unzip update-ca-certificates 
+  apt-get -qq -y install ca-certificates bzip2 python wget -y 
+  update-ca-certificates
+
   clear
   greenMessage "Now enter port to install."
   read -p "Port [eg. 8087]: " portinst
@@ -157,7 +150,7 @@ if [ "$INSTALL" == "Inst" ]; then
   su -c "cd; unzip confighazze.zip" SinusPort-$portinst
   su -c "cd; mkdir -p TeamSpeak3-Client-linux_amd64/plugins; cp plugin/libsoundbot_plugin.so TeamSpeak3-Client-linux_amd64/plugins/" SinusPort-$portinst
   clear
-  sudo ln -sf /usr/lib/x86_64-linux-gnu/qt5/plugins/platforms/ /usr/bin/
+  sudo ln -sf /usr/lib_64-linux-gnu/qt5/plugins/platforms/ /usr/bin/
   clear
   sed -i s/8087/$portinst/g /opt/SinusPort-$portinst/config.ini
   sed -i s/password/$passinst/g /opt/SinusPort-$portinst/password.txt
