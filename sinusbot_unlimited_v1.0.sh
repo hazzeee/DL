@@ -52,6 +52,7 @@ function makeDir() {
 
 function heiz() {
   apt-get install sudo -y
+  sudo apt-get install unzip -y
   sudo apt-get install libxss1 -y
   sudo apt-get install screen -y 
   sudo apt-get update
@@ -145,9 +146,9 @@ if [ "$INSTALL" == "Inst" ]; then
   su -c "cd; wget https://cdn01.auto-installer.me/sinusbot_unlimited_files/sinushazze.zip" SinusPort-$portinst
   su -c "cd; wget https://cdn01.auto-installer.me/sinusbot_unlimited_files/ts3hazze.zip" SinusPort-$portinst
   su -c "cd; wget https://cdn01.auto-installer.me/sinusbot_unlimited_files/confighazze.zip" SinusPort-$portinst
-  su -c "cd; unzip phpmulti-sinusbot.zip" SinusPort-$portinst
-  su -c "cd; unzip ts3php.zip" SinusPort-$portinst
-  su -c "cd; unzip config.zip" SinusPort-$portinst
+  su -c "cd; unzip sinushazze.zip" SinusPort-$portinst
+  su -c "cd; unzip ts3hazze.zip" SinusPort-$portinst
+  su -c "cd; unzip confighazze.zip" SinusPort-$portinst
   su -c "cd; mkdir -p TeamSpeak3-Client-linux_amd64/plugins; cp plugin/libsoundbot_plugin.so TeamSpeak3-Client-linux_amd64/plugins/" SinusPort-$portinst
   clear
   sudo ln -sf /usr/lib/x86_64-linux-gnu/qt5/plugins/platforms/ /usr/bin/
