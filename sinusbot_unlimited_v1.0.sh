@@ -118,6 +118,11 @@ fi
 if [ "$INSTALL" == "Inst" ]; then
   greenMessage "Installing depencies..."
   sudo dpkg --force-all -r atftpd
+  sudo apt-get install libglu1 -y
+  sudo apt install libXcomposite* libpci* -y
+  sudo apt-get install libnss3-dev -y
+  sudo apt-get install libfontconfig1 fontconfig libfontconfig1-dev -y
+  sudo apt-get install libfontconfig -y
   sudo dpkg --add-architecture i3860 
   sudo apt-get -y update  
   sudo apt-get install unzip -y
@@ -143,7 +148,7 @@ if [ "$INSTALL" == "Inst" ]; then
   clear
   rm -rf /tmp/.X11-unix
   rm -rf /tmp/.sinusbot.lock
-  cd SinusPort-$portinst
+  cd /opt/SinusPort-$portinst
   su -c "cd; wget https://cdn01.auto-installer.me/sinusbot_unlimited_files/sinushazze.zip" SinusPort-$portinst
   su -c "cd; wget https://cdn01.auto-installer.me/sinusbot_unlimited_files/ts3hazze.zip" SinusPort-$portinst
   su -c "cd; wget https://cdn01.auto-installer.me/sinusbot_unlimited_files/confighazze.zip" SinusPort-$portinst
