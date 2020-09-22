@@ -120,6 +120,7 @@ if [ "$INSTALL" == "Inst" ]; then
   sudo dpkg --force-all -r atftpd
   sudo dpkg --add-architecture i3860 
   sudo apt-get -y update  
+  sudo apt-get install unzip -y
   sudo apt-get -y dist-upgrade 
   sudo apt-get install screen -y
   sudo apt-get -y -qq install screen x11vnc xvfb libpci* libxcursor1 libpulse0 libpulse0:i386 pulseaudio ca-certificates bzip2 psmisc libglib2.0-0 less cron-apt ntp python iproute2 dbus libnss3 libegl1-mesa x11-xkb-utils libasound2 libxcomposite-dev libxi6 unzip update-ca-certificates 
