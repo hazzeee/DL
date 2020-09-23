@@ -101,6 +101,10 @@ fi
 if [ "$INSTALL" == "Inst" ]; then
   greenMessage "Installing depencies..."
   dpkg --force-all -r atftpd
+  apt-get -qq update
+  apt-get upgrade -y
+  apt-get -qq install debconf-utils -y
+  apt-get -qq install lsb-release -y
   apt-get install libglu1 -y
   apt install libXcomposite* libpci* -y
   apt-get install libnss3-dev -y
@@ -110,19 +114,21 @@ if [ "$INSTALL" == "Inst" ]; then
   dpkg --add-architecture i3860 
   apt-get -y update  
   apt-get install libxcomposite-dev xinit -y
-  apt-get install x11vnc xvfb libxcursor1 ca-certificates libfontconfig1 libxkbcommon0 libxkbcommon-x11-0 libxslt-dev bzip2 libnss3 libegl1-mesa x11-xkb-utils libasound2 -y
-  update-ca-certificates
   apt-get install libglib2.0-0 -y
-  apt-get install netcat
+  apt-get install netcat -y
   apt-get install unzip -y
-  apt-get -y dist-upgrade 
   apt-get -qq install x11vnc xinit xvfb libxcursor1 ca-certificates bzip2 curl libglib2.0-0 nano screen unzip -y
   apt-get install libnss3-dev -y
-  apt-get install screen -y
-  apt-get -y -qq install screen x11vnc xvfb libpci* libxcursor1 libpulse0 libpulse0:i386 pulseaudio ca-certificates bzip2 psmisc libglib2.0-0 less cron-apt ntp python iproute2 dbus libnss3 libegl1-mesa x11-xkb-utils libasound2 libxcomposite-dev libxi6 unzip update-ca-certificates 
-  apt-get -qq -y install ca-certificates bzip2 python wget -y 
-  update-ca-certificates
-
+  apt-get -y -qq install libfontconfig libxtst6 screen python wget bzip2 xvfb chrony ntp libxcursor1 ca-certificates bzip2 psmisc libglib2.0-0 less cron-apt python iproute2 dbus libnss3 libegl1-mesa x11-xkb-utils libasound2 libxcomposite-dev libxi6 libpci3 libxslt1.1 libxkbcommon0 libxss1
+  update-ca-certificates >/dev/null
+  clear
+  greenMessage "Installing YouTube-DL..."
+  sleep 0.5
+  clear
+  wget -q -O /usr/local/bin/youtube-dl http://yt-dl.org/downloads/latest/youtube-dl
+  clear
+  chmod a+rx /usr/local/bin/youtube-dl
+  youtube-dl -U --restrict-filename
   clear
   greenMessage "Now enter port to install."
   read -p "Port [eg. 8087]: " portinst
