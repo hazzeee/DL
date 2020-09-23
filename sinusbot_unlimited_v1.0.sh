@@ -100,26 +100,19 @@ fi
 # install opt
 if [ "$INSTALL" == "Inst" ]; then
   greenMessage "Installing depencies..."
-  dpkg --force-all -r atftpd
-  apt-get -qq update
+  sleep 0.5
+  clear
+  apt-get install wget unzip -y
+  apt-get update
+  apt-get install debconf-utils -y
+  apt-get install lsb-release -y
+  apt-get update
   apt-get upgrade -y
-  apt-get -qq install debconf-utils -y
-  apt-get -qq install lsb-release -y
-  apt-get install libglu1 -y
-  apt install libXcomposite* libpci* -y
-  apt-get install libnss3-dev -y
-  apt-get install libfontconfig1 fontconfig libfontconfig1-dev -y
-  apt-get install libfontconfig -y
-  x11vnc xvfb libxcursor1 bzip2 libnss3 libegl1-mesa x11-xkb-utils libasound2 -y
-  dpkg --add-architecture i3860 
-  apt-get -y update  
-  apt-get install libxcomposite-dev xinit -y
-  apt-get install libglib2.0-0 -y
-  apt-get install netcat -y
-  apt-get install unzip -y
-  apt-get -qq install x11vnc xinit xvfb libxcursor1 ca-certificates bzip2 curl libglib2.0-0 nano screen unzip -y
-  apt-get install libnss3-dev -y
-  apt-get -y -qq install libfontconfig libxtst6 screen python wget bzip2 xvfb chrony ntp libxcursor1 ca-certificates bzip2 psmisc libglib2.0-0 less cron-apt python iproute2 dbus libnss3 libegl1-mesa x11-xkb-utils libasound2 libxcomposite-dev libxi6 libpci3 libxslt1.1 libxkbcommon0 libxss1
+  apt-get install chrony -y
+  apt-get install ntp -y
+  apt-get install -y libfontconfig libxtst6 screen xvfb libxcursor1 ca-certificates bzip2 psmisc libglib2.0-0 less cron-apt python iproute2 dbus libnss3 libegl1-mesa x11-xkb-utils libasound2 libxcomposite-dev libxi6 libpci3 libxslt1.1 libxkbcommon0 libxss1  
+  update-ca-certificates >/dev/null
+  apt-get install ca-certificates bzip2 python wget -y >/dev/null
   update-ca-certificates >/dev/null
   clear
   greenMessage "Installing YouTube-DL..."
