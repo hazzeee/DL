@@ -1,5 +1,9 @@
 #!/bin/bash
 # Created By HAZZE
+# Version: v1.0
+# TS3 Client Version: 3.5.3 [Stable]
+# YouTube-DL Version: /
+
 
 # variables
 
@@ -111,9 +115,9 @@ if [ "$INSTALL" == "Inst" ]; then
   apt-get install chrony -y
   apt-get install ntp -y
   apt-get install -y libfontconfig libxtst6 screen xvfb libxcursor1 ca-certificates bzip2 psmisc libglib2.0-0 less cron-apt python iproute2 dbus libnss3 libegl1-mesa x11-xkb-utils libasound2 libxcomposite-dev libxi6 libpci3 libxslt1.1 libxkbcommon0 libxss1  
-  update-ca-certificates >/dev/null
-  apt-get install ca-certificates bzip2 python wget -y >/dev/null
-  update-ca-certificates >/dev/null
+  update-ca-certificates
+  apt-get install ca-certificates bzip2 python wget -y
+  update-ca-certificates
   clear
   greenMessage "Installing YouTube-DL..."
   sleep 0.5
