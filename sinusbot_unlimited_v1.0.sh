@@ -49,11 +49,13 @@ function errorContinue() {
 }
 
 function ytdl() {
-  curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
+  wget -q -O /usr/local/bin/youtube-dl http://yt-dl.org/downloads/latest/youtube-dl
+  clear
   chmod a+rx /usr/local/bin/youtube-dl
+  youtube-dl -U --restrict-filename
 }
 
-# provera da li je root
+# check is it root
 if [ "$(id -u)" != "0" ]; then
   errorExit "Change to root account required!"
 fi
