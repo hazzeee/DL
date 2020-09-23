@@ -5,14 +5,15 @@
 # YouTube-DL Version: /
 
 
-# variables
+#variables
 
 MACHINE=$(uname -m)
 Version="v1.0"
 IPADDR=$(ip route get 8.8.8.8 | awk {'print $7'} | tr -d '\n')
 PW=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 8 | head -n 1)
+AUTHOR="HAZZE"
 
-# functs
+#functs
 
 function greenMessage() {
   echo -e "\\033[32;1m${*}\\033[0m"
@@ -55,16 +56,18 @@ function ytdl() {
   youtube-dl -U --restrict-filename
 }
 
-# check is it root
+#check is it root
 if [ "$(id -u)" != "0" ]; then
   errorExit "Change to root account required!"
 fi
 clear
+
+#print tos
 greenMessage "This is the automatic cracked SinusBot installer. USE AT YOUR OWN RISK"!
 sleep 1
 cyanMessage "You can choose between installing, upgrading and removing the SinusBot."
 sleep 1
-redMessage "Installer by HAZZE | RawCloud.me - Your game-/voiceserver hoster."
+redMessage "Installer by $AUTHOR | RawCloud.me - Your game-/voiceserver hoster."
 sleep 1
 yellowMessage "You're using installer $Version"
 
