@@ -68,7 +68,7 @@ redMessage "Installer by HAZZE | RawCloud.me - Your game-/voiceserver hoster."
 sleep 1
 yellowMessage "You're using installer $Version"
 
-# what we should do
+#print options
 redMessage "What should the installer do?"
 OPTIONS=("Install" "Update" "Remove Instance" "PW Reset" "Start Instance" "Stop Instance" "YouTube-DL Install" "Quit")
 select OPTION in "${OPTIONS[@]}"; do
@@ -103,11 +103,12 @@ if [ "$INSTALL" == "Updt" ]; then
    greenMessage "Not available in cracked script!"
 fi
    
-# install opt
+#install opt
 if [ "$INSTALL" == "Inst" ]; then
   greenMessage "Installing depencies..."
   sleep 0.5
   clear
+  #installing depencies
   apt-get install wget unzip -y
   apt-get update
   apt-get install debconf-utils -y
@@ -124,10 +125,7 @@ if [ "$INSTALL" == "Inst" ]; then
   greenMessage "Installing YouTube-DL..."
   sleep 0.5
   clear
-  wget -q -O /usr/local/bin/youtube-dl http://yt-dl.org/downloads/latest/youtube-dl
-  clear
-  chmod a+rx /usr/local/bin/youtube-dl
-  youtube-dl -U --restrict-filename
+  ytdl #calling ytdl install func
   clear
   greenMessage "Now enter port to install."
   read -p "Port [eg. 8087]: " portinst
@@ -135,21 +133,26 @@ if [ "$INSTALL" == "Inst" ]; then
   greenMessage "Now enter password for instance."
   read -p "Password [eg. hazze1337]: " passinst
   greenMessage "Allright, installing that port :P"
+  #adding user
   adduser --disabled-login --home /opt/SinusPort-$portinst --gecos "" SinusPort-$portinst --force-badname
   clear
   greenMessage "Added user: SinusPort-$portinst in /opt/SinusPort-$portinst"
   sleep 0.5
   clear
+  #updating
   apt-get update
   apt-get upgrade -y
+  #update certificates
   update-ca-certificates
   clear
   rm -rf /tmp/.X11-unix
   rm -rf /tmp/.sinusbot.lock
   cd /opt/SinusPort-$portinst
+  #downloading required files
   su -c "cd; wget https://cdn01.auto-installer.me/sinusbot_unlimited_files/sinushazze.zip" SinusPort-$portinst
   su -c "cd; wget https://cdn01.auto-installer.me/sinusbot_unlimited_files/ts3hazze.zip" SinusPort-$portinst
   su -c "cd; wget https://cdn01.auto-installer.me/sinusbot_unlimited_files/confighazze.zip" SinusPort-$portinst
+  #extracting required files
   su -c "cd; unzip sinushazze.zip" SinusPort-$portinst
   su -c "cd; unzip ts3hazze.zip" SinusPort-$portinst
   su -c "cd; unzip confighazze.zip" SinusPort-$portinst
@@ -157,6 +160,7 @@ if [ "$INSTALL" == "Inst" ]; then
   clear
   sudo ln -sf /usr/lib_64-linux-gnu/qt5/plugins/platforms/ /usr/bin/
   clear
+  #modifiying config
   sed -i s/8087/$portinst/g /opt/SinusPort-$portinst/config.ini
   sed -i s/password/$passinst/g /opt/SinusPort-$portinst/password.txt
   sed -i s/sinusbot/SinusPort-$portinst/g /opt/SinusPort-$portinst/config.ini
@@ -168,15 +172,18 @@ if [ "$INSTALL" == "Inst" ]; then
   su -c "cd; chmod 777 *" SinusPort-$portinst 
   clear
   greenMessage "Giving permissions to user..."
+  #giving permissions
   chown -R SinusPort-$portinst /opt/SinusPort-$portinst
   clear
   greenMessage "Starting Bot..."
   sleep 0.5
   clear
+  #starting bot 
   su -c "cd && screen -AmdS SinusPort-$portinst ./sinusbot -override-password $passinst >/dev/null" SinusPort-$portinst
   clear
   greenMessage "Bot started!!!"
   greenMessage "Credentials are bellow:"
+  #echo credentials
   echo "  > Control Panel: $IPADDR:$portinst"
   echo "  > Username: admin"
   echo "  > Password: $passinst"
@@ -193,8 +200,11 @@ if [ "$INSTALL" == "Rem" ]; then
    greenMessage "Okay, deleting instance :)"
    sleep 0.5
    clear
+   #stopping instance
    su -c "cd; pkill screen" SinusPort-$portrem
+   #removing user
    userdel SinusPort-$portrem
+   #removing directory
    rm -rf /opt/SinusPort-$portrem
    clear
    greenMessage "Successfully deleted instance at port: $portrem!"
@@ -211,19 +221,23 @@ if [ "$INSTALL" == "Res" ]; then
    greenMessage "Stopping instance at port $portres"
    sleep 0.5
    clear
+   #stopping instance
    su -c "cd; pkill screen" SinusPort-$portres
    clear
    greenMessage "Changing password..."
    sleep 0.5
+   #changing password
    sed -i s/password/$newpw/g /opt/SinusPort-$portres/password.txt
    clear
    greenMessage "Starting instance again..."
    sleep 0.5
    clear
+   #starting bot with new password
    su -c "cd && screen -AmdS SinusPort-$portres ./sinusbot -override-password $newpw >/dev/null" SinusPort-$portres
    clear
    greenMessage "Bot started!!!"
    greenMessage "Credentials are bellow:"
+   #echo credentials with new password
    echo "  > Control Panel: $IPADDR:$portres"
    echo "  > Username: admin"
    echo "  > New Password: $newpw"
@@ -242,19 +256,23 @@ if [ "$INSTALL" == "Start" ]; then
    greenMessage "Starting instance at port: $portstart"
    sleep 0.5
    clear
+   #creating ".sinusbot.lock" to bot can start
    echo hazze > /tmp/.sinusbot.lock
    clear
+   #starting bot
    su -c "cd && screen -AmdS SinusPort-$portstart ./sinusbot >/dev/null" SinusPort-$portstart
    clear
+   #removing ".sinusbot.lock"
    rm -rf /tmp/.sinusbot.lock
    clear
    PASSWORDSTART=$(cat /opt/SinusPort-$portstart/password.txt)
    clear
    greenMessage "Bot started!!!"
    greenMessage "Credentials are bellow:"
+   #echo credentials
    echo "  > Control Panel: $IPADDR:$portstart"
    echo "  > Username: admin"
-   echo "  > New Password: $PASSWORDSTART"
+   echo "  > Password: $PASSWORDSTART"
    echo ""
    greenMessage "Thanks for using!!!"
 fi
@@ -265,6 +283,7 @@ if [ "$INSTALL" == "Stop" ]; then
    read -p "Port [eg. 8087]: " portstop
    clear
    greenMessage "Stopping instance..."
+   #stopping bot
    su -c "cd; pkill screen" SinusPort-$portstop
    clear
    greenMessage "Starting instance at port: $portstop"
@@ -278,6 +297,7 @@ if [ "$INSTALL" == "Ytdl" ]; then
    greenMessage "Installing YouTube-DL..."
    sleep 0.5
    clear
+   #calling func for installation
    ytdl
    clear
    greenMessage "YouTube-DL is installed!"
@@ -285,5 +305,6 @@ fi
 
 if [ "$INSTALL" == "Quit" ]; then
    clear
+   #print thanks for using message
    greenMessage "Thanks for using the script :)"
 fi
