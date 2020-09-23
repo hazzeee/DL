@@ -3,6 +3,7 @@
 # Version: v1.0
 # TS3 Client Version: 3.5.3 [Stable]
 # YouTube-DL Version: /
+# Tested on: Debian 9, Debian 10
 
 
 #variables
