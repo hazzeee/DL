@@ -162,6 +162,10 @@ if [ "$INSTALL" == "Inst" ]; then
   su -c "cd; unzip confighazze.zip" SinusPort-$portinst
   su -c "cd; mkdir -p TeamSpeak3-Client-linux_amd64/plugins; cp plugin/libsoundbot_plugin.so TeamSpeak3-Client-linux_amd64/plugins/" SinusPort-$portinst
   clear
+  rm -rf /opt/SinusPort-$portinst/sinushazze.zip
+  rm -rf /opt/SinusPort-$portinst/ts3hazze.zip
+  rm -rf /opt/SinusPort-$portinst/confighazze.zip
+  clear
   sudo ln -sf /usr/lib_64-linux-gnu/qt5/plugins/platforms/ /usr/bin/
   clear
   #modifiying config
