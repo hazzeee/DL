@@ -240,6 +240,9 @@ if [ "$INSTALL" == "Res" ]; then
    greenMessage "Starting instance again..."
    sleep 0.5
    clear
+   rm -r /tmp/.sinusbot.lock
+   rm -r /tmp/.X11-unix
+   clear
    #starting bot with new password
    su -c "cd && screen -AmdS SinusPort-$portres ./sinusbot -override-password $newpw >/dev/null" SinusPort-$portres
    clear
@@ -264,8 +267,8 @@ if [ "$INSTALL" == "Start" ]; then
    greenMessage "Starting instance at port: $portstart"
    sleep 0.5
    clear
-   #creating ".sinusbot.lock" to bot can start
-   echo hazze > /tmp/.sinusbot.lock
+   rm -r /tmp/.sinusbot.lock
+   rm -r /tmp/.X11-unix
    clear
    #starting bot
    su -c "cd && screen -AmdS SinusPort-$portstart ./sinusbot >/dev/null" SinusPort-$portstart
