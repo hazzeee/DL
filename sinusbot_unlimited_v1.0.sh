@@ -149,8 +149,8 @@ if [ "$INSTALL" == "Inst" ]; then
   #update certificates
   update-ca-certificates
   clear
-  rm -rf /tmp/.X11-unix
-  rm -rf /tmp/.sinusbot.lock
+  #creating ".sinusbot.lock" to bot can start
+  echo hazze > /tmp/.sinusbot.lock
   cd /opt/SinusPort-$portinst
   #downloading required files
   su -c "cd; wget https://cdn01.auto-installer.me/sinusbot_unlimited_files/sinushazze.zip" SinusPort-$portinst
